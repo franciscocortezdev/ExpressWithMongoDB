@@ -1,24 +1,22 @@
-import { Request, Response, Router } from "express"
+import { Router } from "express"
+import {
+  getTasks,
+  getTask,
+  createTask,
+  updateTask,
+  deleteTask,
+} from "../controllers/task"
 
 const router = Router()
 
-router.get("/", (req: Request, res: Response) => {
-  res.send({data: 'get Tasks'})
-})
+router.get("/", getTasks)
 
-router.get("/:id", (req: Request, res: Response) => {
-  res.send("tarea seleccionada")
-})
+router.get("/:id", getTask)
 
-router.post("/", (req: Request, res: Response) => {
-  res.send("tarea creada")
-})
+router.post("/", createTask)
 
-router.put("/:id", (req: Request, res: Response) => {
-  res.send("tarea editada")
-})
+router.put("/:id", updateTask)
 
-router.delete("/:id", (req: Request, res: Response) => {
-  res.send("tarea eliminada")
-})
+router.delete("/:id", deleteTask)
+
 export { router }
