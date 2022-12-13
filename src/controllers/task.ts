@@ -1,12 +1,13 @@
 import { Request, Response } from "express"
 import { getAllTasks } from "../services/task"
+import { handleError } from "../utils/handleError"
 
 export const getTasks = async (req: Request, res: Response) => {
   try {
     const tasks = getAllTasks()
     res.send({data: tasks})
   } catch (error) {
-    console.log(error)
+    handleError(res, 'ERROR_GET_TASKS')
   }
   
 }
