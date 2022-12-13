@@ -1,7 +1,14 @@
 import { Request, Response } from "express"
+import { getAllTasks } from "../services/task"
 
-export const getTasks = (req: Request, res: Response) => {
-  res.send({data: 'get Tasks'})
+export const getTasks = async (req: Request, res: Response) => {
+  try {
+    const tasks = getAllTasks()
+    res.send({data: tasks})
+  } catch (error) {
+    console.log(error)
+  }
+  
 }
 
 export const getTask = (req: Request, res: Response) => {
