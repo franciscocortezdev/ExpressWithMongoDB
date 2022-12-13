@@ -1,7 +1,7 @@
 import taskModel from "../models/task"
 import { TaskInterface } from "../interfaces/taskInterface"
 
-const insertCar = async (item: TaskInterface) => {
+export const insertTask = async (item: TaskInterface) => {
   const responseInsert = await taskModel.create(item);
   return responseInsert;
 };
@@ -11,20 +11,20 @@ export const getAllTasks = async () => {
   return responseItem
 }
 
-export const getOneTasks = async (id: number) => {
+export const getOneTasks = async (id: string) => {
   const responseItem = await taskModel.findOne({_id: id})
   return responseItem
 }
 
 
-export const updateTask = async (id: string, data: TaskInterface) => {
+export const updateOneTask = async (id: string, data: TaskInterface) => {
   const responseItem = await taskModel.findOneAndUpdate({ _id: id }, data, {
     new: true,
   });
   return responseItem;
 };
 
-export const deleteTask = async (id: string) => {
+export const deleteOneTask = async (id: string) => {
   const responseItem = await taskModel.remove({ _id: id });
   return responseItem;
 };
