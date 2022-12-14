@@ -25,6 +25,6 @@ export const updateOneTask = async (id: string, data: TaskInterface) => {
 };
 
 export const deleteOneTask = async (id: string) => {
-  const responseItem = await taskModel.remove({ _id: id });
+  const responseItem = await taskModel.deleteOne({ _id: id });
   return responseItem;
 };
