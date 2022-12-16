@@ -1,5 +1,6 @@
 import userModel from "../models/user";
 import { UserInterface } from "../interfaces/userInterface";
+import { AuthInterface } from "../interfaces/authInterface";
 
 export const userRegister = async (user: UserInterface) => {
   const responseInsert = await userModel.create(user);
@@ -7,8 +8,8 @@ export const userRegister = async (user: UserInterface) => {
 };
 
 
-export const userLogin = async (id: string) => {
-  const responseItem = await userModel.findOne({_id: id})
+export const userLogin = async ({email, password}:  AuthInterface) => {
+  const responseItem = await userModel.findOne({email})
   return responseItem
 }
 
