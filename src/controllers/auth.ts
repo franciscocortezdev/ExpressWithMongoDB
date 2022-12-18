@@ -8,7 +8,7 @@ export const loginUser = async (req: Request, res: Response) => {
 
   try {
     const response = await userLogin(body)
-    res.send({ data: "started session" })
+    res.send({ data: response })
   } catch (error) {
     handleError(res, "ERROR_LOGIN")
   }
