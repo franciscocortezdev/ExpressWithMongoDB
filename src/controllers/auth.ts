@@ -1,22 +1,27 @@
 import { Request, Response } from "express"
 
 import { handleError } from "../utils/handleError"
+import { userLogin, userRegister } from "../services/auth"
 
+export const loginUser = async (req: Request, res: Response) => {
+  const { body } = req
 
-export const registerUser = async (req: Request, res: Response) => {
-  const {body} = req
   try {
-    res.send({ data: 'registrado' })
+    const response = await userLogin(body)
+    res.send({ data: "started session" })
   } catch (error) {
-    handleError(res, "ERROR_REGISTER")
+    handleError(res, "ERROR_LOGIN")
   }
 }
 
-export const loginUser = async (req: Request, res: Response) => {
+export const registerUser = async (req: Request, res: Response) => {
+  const { body } = req
   try {
-  
-    res.send({ data: 'started session' })
+
+    const response = await userRegister(body)
+    res.send({ data: response })
   } catch (error) {
-    handleError(res, "ERROR_LOGIN")
+    console.log(error)
+    handleError(res, "ERROR_REGISTER")
   }
 }
