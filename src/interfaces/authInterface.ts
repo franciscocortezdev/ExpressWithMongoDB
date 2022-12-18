@@ -1,4 +1,4 @@
-export interface Auth {
+export interface AuthInterface{
   email: string;
   password: string;
 }
