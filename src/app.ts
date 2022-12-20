@@ -18,4 +18,5 @@ dbConnect()
 
 app.listen(PORT, () => {
   console.log("Server started")
+
 })

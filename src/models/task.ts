@@ -10,6 +10,10 @@ const TaskSchema = new mongoose.Schema(
       type: Boolean,
       required: true,
     },
+    idUser: {
+      type: mongoose.Schema.Types.ObjectId, ref: 'users',
+      require: true
+    }
   },
   {
     timestamps: true,
