@@ -6,17 +6,18 @@ import {
   updateTask,
   deleteTask,
 } from "../controllers/task"
+import { authSession } from "../middleware/session"
 
 const router = Router()
 
-router.get("/", getTasks)
+router.get("/",authSession, getTasks)
 
-router.get("/:id", getTask)
+router.get("/:id",authSession, getTask)
 
-router.post("/", createTask)
+router.post("/",authSession, createTask)
 
-router.put("/:id", updateTask)
+router.put("/:id",authSession, updateTask)
 
-router.delete("/:id", deleteTask)
+router.delete("/:id",authSession, deleteTask)
 
 export { router }

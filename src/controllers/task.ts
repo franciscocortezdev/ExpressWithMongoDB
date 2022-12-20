@@ -1,4 +1,5 @@
-import { Request, Response } from "express"
+import { Response } from "express"
+import { reqExtend } from "../interfaces/reqExtend"
 import {
   insertTask,
   getAllTasks,
@@ -9,29 +10,32 @@ import {
 import { handleError } from "../utils/handleError"
 
 
-export const createTask = async (req: Request, res: Response) => {
-  const {body} = req
+export const createTask = async (req: reqExtend, res: Response) => {
+  const {body, user} = req
   try {
-    const response = await insertTask(body)
+    const response = await insertTask({...body, idUser: user?._id})
     res.send({ data: response })
   } catch (error) {
     handleError(res, "ERROR_POST_TASK")
   }
 }
 
-export const getTasks = async (req: Request, res: Response) => {
+export const getTasks = async (req: reqExtend, res: Response) => {
+  const { user } = req
   try {
-    const response = await getAllTasks()
+    const response = await getAllTasks(user?._id)
     res.send({ data: response })
   } catch (error) {
     handleError(res, "ERROR_GET_TASKS")
   }
 }
 
-export const getTask = async (req: Request, res: Response) => {
+export const getTask = async (req: reqExtend, res: Response) => {
+  const { user } = req
   const {id}=req.params
   try {
-    const response = await getOneTasks(id)
+    const response = await getOneTasks(id, user?._id)
+    if (!response) return handleError(res, "ERROR_TASK_NOT_FOUND")
     res.send({ data: response })
   } catch (error) {
     handleError(res, "ERROR_GET_TASK")
@@ -39,22 +43,25 @@ export const getTask = async (req: Request, res: Response) => {
 }
 
 
-export const updateTask = async (req: Request, res: Response) => {
+export const updateTask = async (req: reqExtend, res: Response) => {
   const {id}=req.params
-  const {body} = req
+  const {body, user} = req
 
   try {
-    const response = await updateOneTask(id, body)
+    const response = await updateOneTask(id, body, user?._id)
+    if (!response) return handleError(res, "ERROR_TASK_NOT_FOUND")
     res.send({ data: response })
   } catch (error) {
     handleError(res, "ERROR_PUT_TASK")
   }
 }
 
-export const deleteTask = async (req: Request, res: Response) => {
+export const deleteTask = async (req: reqExtend, res: Response) => {
+  const { user } = req
   const {id}=req.params
   try {
-    const response = await deleteOneTask(id)
+    const response = await deleteOneTask(id, user?._id)
+    if (!response.deletedCount) return handleError(res, "ERROR_TASK_NOT_FOUND")
     res.send({ data: response })
   } catch (error) {
     handleError(res, "ERROR_DELETE_TASK")
