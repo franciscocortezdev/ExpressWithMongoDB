@@ -4,14 +4,16 @@ import cors from "cors"
 import dbConnect from "./config/mongoConnection"
 import dotenv from "dotenv"
 dotenv.config()
-import { swaggerDocs } from "./services/swagger"
+import { swaggerSpec } from "./docs/swagger"
+import swaggerUi from "swagger-ui-express"
 
 const app: Application = express()
 const PORT = process.env.PORT || 3001
 
 app.use(cors())
 app.use(express.json())
-app.use(router)
+app.use('/',router)
+app.use('/documentation', swaggerUi.serve, swaggerUi.setup(swaggerSpec))
 
 dbConnect()
   .then((result) => console.log("Database conected"))
@@ -19,5 +21,5 @@ dbConnect()
 
 app.listen(PORT, () => {
   console.log("Server started")
-  swaggerDocs(app, Number(PORT))
+ 
 })

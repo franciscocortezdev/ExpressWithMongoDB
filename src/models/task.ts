@@ -8,7 +8,7 @@ const TaskSchema = new mongoose.Schema(
     },
     done: {
       type: Boolean,
-      required: true,
+      default: false,
     },
     idUser: {
       type: mongoose.Schema.Types.ObjectId, ref: 'users',

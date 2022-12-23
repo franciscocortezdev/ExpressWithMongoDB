@@ -12,7 +12,7 @@ export const authSession = (
 ) => {
   try {
     const jwtUser = req.headers.authorization
-    if (!jwtUser) return handleError(res, "ERROR_JWT_NOT_FOUND")
+    if (!jwtUser) return handleError(res, "ERROR_ACCESS_UNAUTHORIZED", 403)
     const jwt = jwtUser.split(" ").pop()
     const jwtCorrect = compareToken(`${jwt}`)
     req.user = jwtCorrect as JwtPayload 
