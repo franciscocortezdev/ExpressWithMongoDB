@@ -35,7 +35,7 @@ export const getTask = async (req: reqExtend, res: Response) => {
   const {id}=req.params
   try {
     const response = await getOneTasks(id, user?._id)
-    if (!response) return handleError(res, "ERROR_TASK_NOT_FOUND")
+    if (!response) return handleError(res, "ERROR_TASK_NOT_FOUND", 404)
     res.send({ data: response })
   } catch (error) {
     handleError(res, "ERROR_GET_TASK")
@@ -49,7 +49,7 @@ export const updateTask = async (req: reqExtend, res: Response) => {
 
   try {
     const response = await updateOneTask(id, body, user?._id)
-    if (!response) return handleError(res, "ERROR_TASK_NOT_FOUND")
+    if (!response) return handleError(res, "ERROR_TASK_NOT_FOUND", 404)
     res.send({ data: response })
   } catch (error) {
     handleError(res, "ERROR_PUT_TASK")
@@ -61,7 +61,7 @@ export const deleteTask = async (req: reqExtend, res: Response) => {
   const {id}=req.params
   try {
     const response = await deleteOneTask(id, user?._id)
-    if (!response.deletedCount) return handleError(res, "ERROR_TASK_NOT_FOUND")
+    if (!response.deletedCount) return handleError(res, "ERROR_TASK_NOT_FOUND", 404)
     res.send({ data: response })
   } catch (error) {
     handleError(res, "ERROR_DELETE_TASK")
