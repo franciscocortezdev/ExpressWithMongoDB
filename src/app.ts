@@ -4,6 +4,7 @@ import cors from "cors"
 import dbConnect from "./config/mongoConnection"
 import dotenv from "dotenv"
 dotenv.config()
+import { swaggerDocs } from "./services/swagger"
 
 const app: Application = express()
 const PORT = process.env.PORT || 3001
@@ -18,5 +19,5 @@ dbConnect()
 
 app.listen(PORT, () => {
   console.log("Server started")
-
+  swaggerDocs(app, Number(PORT))
 })
