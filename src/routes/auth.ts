@@ -3,6 +3,36 @@ import { loginUser, registerUser } from "../controllers/auth"
 
 const router = Router()
 
+/**
+ * @swagger
+ * tags: 
+ *  name: Auth
+ * 
+ *  
+ * 
+ * /auth/login:
+ *
+ *  post: 
+ *    tags: [Auth]
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            properties:
+ *              email:
+ *                  type: string
+ *                  example: user@email.com
+ *              password: 
+ *                  type: string
+ *                  example: userpassword
+ *    responses:
+ *      201:
+ *        description: User logged
+ *      
+ * 
+ * 
+ */
 
 router.post("/register", registerUser)
 router.post("/login", loginUser)
