@@ -11,6 +11,7 @@ export const userLogin = async ({email, password}:  AuthInterface) => {
 
 export const userRegister = async (user: UserInterface) => {
   const responseInsert = await userModel.create(user);
+  responseInsert.set("password", undefined)
   return responseInsert;
 };
 

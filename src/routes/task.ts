@@ -44,7 +44,8 @@ const router = Router()
  *                              type: string
  *                            updatedAt:
  *                              type: string
- *                      
+ *     security:
+ *        - JWT_auth: []            
  * 
  * 
  *   post:
@@ -83,9 +84,10 @@ const router = Router()
  *                          type: string
  *                        updatedAt:
  *                          type: string
- *         
  *       500:
  *         description: Some server error
+ *     security:
+ *        - JWT_auth: []       
  * 
  * 
  * /task/{id}:
@@ -123,7 +125,8 @@ const router = Router()
  *         
  *       404:
  *         description: The task was not found
- * 
+ *     security:
+ *        - JWT_auth: []       
  * 
  * 
  *   put:
@@ -155,9 +158,8 @@ const router = Router()
  *        description: The book was not found
  *      500:
  *        description: Some error happened
- * 
- * 
- * 
+ *    security:
+ *        - JWT_auth: []      
  * 
  * 
  *   delete:
@@ -176,6 +178,8 @@ const router = Router()
  *         description: The task was deleted
  *       404:
  *         description: The task was not found
+ *     security:
+ *        - JWT_auth: []      
  */
 
 router.get("/",authSession, getTasks)

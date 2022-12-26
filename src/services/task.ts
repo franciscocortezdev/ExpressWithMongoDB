@@ -3,6 +3,7 @@ import { TaskInterface } from "../interfaces/taskInterface"
 
 export const insertTask = async (item: TaskInterface) => {
   const responseInsert = await taskModel.create(item);
+  responseInsert.set("idUser", undefined)
   return responseInsert;
 };
 
