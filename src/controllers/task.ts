@@ -22,10 +22,9 @@ export const createTask = async (req: reqExtend, res: Response) => {
 
 export const getTasks = async (req: reqExtend, res: Response) => {
   const { user } = req
-  const {filter} = req.query
-
+  const filters = req.query
   try {
-    const response = await getAllTasks(user?._id, `${filter}`)
+    const response = await getAllTasks(user?._id, filters)
     res.send({ data: response })
   } catch (error) {
     handleError(res, "ERROR_GET_TASKS")

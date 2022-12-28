@@ -1,5 +1,5 @@
 import taskModel from "../models/task"
-import { TaskInterface } from "../interfaces/taskInterface"
+import { TaskInterface, FiltersGetAll } from "../interfaces/taskInterface"
 
 export const insertTask = async (item: TaskInterface) => {
   const responseInsert = await taskModel.create(item)
@@ -7,10 +7,15 @@ export const insertTask = async (item: TaskInterface) => {
   return responseInsert
 }
 
-export const getAllTasks = async (idUser: string, filter: string ) => {
-  console.log(filter)
- 
-  const responseItem = await taskModel.find({ idUser, body: { $regex: filter === 'undefined'? '' : filter }})
+export const getAllTasks = async (idUser: string, filters: FiltersGetAll) => {
+  
+  const query = {  
+    ...filters,
+    idUser, 
+    body: { $regex: filters.body ?? ''}
+  }
+  
+  const responseItem = await taskModel.find(query)
   return responseItem
 }
 
