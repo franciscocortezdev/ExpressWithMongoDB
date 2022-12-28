@@ -5,3 +5,8 @@ export interface TaskInterface{
   done: boolean,
   idUser: mongoose.Types.ObjectId
 }
+
+export interface FiltersGetAll{
+  body?: string,
+  done?: boolean
+}

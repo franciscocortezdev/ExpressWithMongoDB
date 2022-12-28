@@ -22,10 +22,10 @@ const router = Router()
  *            properties:
  *              email:
  *                  type: string
- *                  example: user@email.com
+ *                  example: prueba11@prueba.com
  *              password: 
  *                  type: string
- *                  example: userpassword
+ *                  example: prueba11
  *    responses:
  *      201:
  *        description: User logged
