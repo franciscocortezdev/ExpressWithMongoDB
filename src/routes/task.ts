@@ -21,6 +21,19 @@ const router = Router()
  *   get:
  *     summary: Lists all the tasks
  *     tags: [Tasks]
+ *     parameters:
+ *           - in: query
+ *             name: body
+ *             schema:
+ *               type: string
+ *             required: false
+ * 
+ *           - in: query
+ *             name: done
+ *             required: false
+ *             schema:
+ *               type: boolean
+ *                 
  *     responses:
  *       200:
  *         description: Get list all tasks
