@@ -1,5 +1,6 @@
 import { Router } from "express"
 import { loginUser, registerUser } from "../controllers/auth"
+import { validateLogin } from "../middleware/validators/auth"
 
 const router = Router()
 
@@ -35,7 +36,7 @@ const router = Router()
  */
 
 router.post("/register", registerUser)
-router.post("/login", loginUser)
+router.post("/login", validateLogin, loginUser)
 
 
 export { router }
