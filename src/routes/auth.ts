@@ -1,6 +1,6 @@
 import { Router } from "express"
 import { loginUser, registerUser } from "../controllers/auth"
-import { validateLogin } from "../middleware/validators/auth"
+import { validateLogin, validateRegister } from "../middleware/validators/auth"
 
 const router = Router()
 
@@ -35,7 +35,7 @@ const router = Router()
  * 
  */
 
-router.post("/register", registerUser)
+router.post("/register",validateRegister, registerUser)
 router.post("/login", validateLogin, loginUser)
 
 
