@@ -1,10 +1,8 @@
-import { NextFunction, Request, Response } from "express";
-import { loginParams } from "../../interfaces/authInterface";
-import { handleError } from "../../utils/handleError";
-const { check, validationResult } = require('express-validator');
+import { NextFunction, Request, Response } from "express"
+import { loginParams } from "../../interfaces/authInterface"
+import { handleError } from "../../utils/handleError"
+import { check, validationResult } from "express-validator"
 
-
-  
 export const validateLogin = [
   check("email").exists().notEmpty().isEmail(),
   check("password").exists().notEmpty(),
@@ -14,10 +12,9 @@ export const validateLogin = [
       return next()
     } catch (error) {
       const errorsParams = error as loginParams
-        handleError(res, errorsParams.errors, 403)
+      handleError(res, errorsParams.errors, 403)
     }
-  
-  }
+  },
 ]
 
 export const validateRegister = [
@@ -31,12 +28,7 @@ export const validateRegister = [
       return next()
     } catch (error) {
       const errorsParams = error as loginParams
-        handleError(res, errorsParams.errors, 403)
+      handleError(res, errorsParams.errors, 403)
     }
-  
-  }
+  },
 ]
-
-
-
-

@@ -7,6 +7,7 @@ import {
   deleteTask,
 } from "../controllers/task"
 import { authSession } from "../middleware/session"
+import { validateCreateTask, validateUpdateTask } from "../middleware/validators/task"
 
 const router = Router()
 
@@ -199,9 +200,9 @@ router.get("/",authSession, getTasks)
 
 router.get("/:id",authSession, getTask)
 
-router.post("/",authSession, createTask)
+router.post("/",validateCreateTask ,authSession, createTask)
 
-router.put("/:id",authSession, updateTask)
+router.put("/:id",validateUpdateTask, authSession, updateTask)
 
 router.delete("/:id",authSession, deleteTask)
 

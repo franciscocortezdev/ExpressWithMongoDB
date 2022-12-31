@@ -1,9 +1,8 @@
 import userModel from "../models/user";
 import { UserInterface } from "../interfaces/userInterface";
-import { AuthInterface } from "../interfaces/authInterface";
 
 
-export const userLogin = async ({email, password}:  AuthInterface) => {
+export const userLogin = async (email: string) => {
   const responseItem = await userModel.findOne({email})
   return responseItem
 }
