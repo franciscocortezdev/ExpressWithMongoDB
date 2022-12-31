@@ -3,12 +3,15 @@ import { handleError } from "../utils/handleError"
 import { userLogin, userRegister } from "../services/auth"
 import { encrypt, decrypt } from "../utils/handleBcrypt"
 import { generateToken } from "../utils/handleJWT"
+import { matchedData } from "express-validator/src/matched-data"
+import { AuthInterface } from "../interfaces/authInterface"
+import { UserInterface } from "../interfaces/userInterface"
 
 export const loginUser = async (req: Request, res: Response) => {
-  const { body } = req
+  const body = matchedData(req) as AuthInterface
 
   try {
-    const response = await userLogin(body)
+    const response = await userLogin(body.email)
     if(!response) return handleError(res, "ERROR_USER_NOT_FOUND")
     const passDecrypt = await decrypt(body.password, response.password)
     if(!passDecrypt) return handleError(res, "ERROR_PASSWORD")
@@ -29,9 +32,10 @@ export const loginUser = async (req: Request, res: Response) => {
 }
 
 export const registerUser = async (req: Request, res: Response) => {
-  const { body } = req
+  const body = matchedData(req) as UserInterface
+
   try {
-    const userExist = await userLogin(body)
+    const userExist = await userLogin(body.email)
     if(userExist) return handleError(res, "ERROR_USER_ALREADY_EXISTS")
     const passEncrypt = await encrypt(body.password)
     const response = await userRegister({...body, password: passEncrypt})

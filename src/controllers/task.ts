@@ -1,5 +1,7 @@
 import { Response } from "express"
+import { matchedData } from "express-validator"
 import { reqExtend } from "../interfaces/reqExtend"
+import { TaskInterface } from "../interfaces/taskInterface"
 import {
   insertTask,
   getAllTasks,
@@ -11,7 +13,10 @@ import { handleError } from "../utils/handleError"
 
 
 export const createTask = async (req: reqExtend, res: Response) => {
-  const {body, user} = req
+  const {user} = req
+
+  const body = matchedData(req) as TaskInterface
+
   try {
     const response = await insertTask({...body, idUser: user?._id})
     res.send({ data: response })
@@ -46,14 +51,15 @@ export const getTask = async (req: reqExtend, res: Response) => {
 
 export const updateTask = async (req: reqExtend, res: Response) => {
   const {id}=req.params
-  const {body, user} = req
+  const {user} = req
+
+  const body = matchedData(req) as TaskInterface
 
   try {
     const response = await updateOneTask(id, body, user?._id)
-    if (!response) return handleError(res, "ERROR_TASK_NOT_FOUND", 404)
     res.send({ data: response })
   } catch (error) {
-    handleError(res, "ERROR_PUT_TASK")
+    handleError(res, "ERROR_UPDATE_TASK")
   }
 }
 
