@@ -1,4 +1,5 @@
 import mongoose from "mongoose"
+import paginate from "mongoose-paginate-v2"
 
 const TaskSchema = new mongoose.Schema(
   {
@@ -8,13 +9,14 @@ const TaskSchema = new mongoose.Schema(
     },
     done: {
       type: Boolean,
-      required: true
+      required: true,
     },
     idUser: {
-      type: mongoose.Schema.Types.ObjectId, ref: 'users',
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "users",
       require: true,
-      select: false
-    }
+      select: false,
+    },
   },
   {
     timestamps: true,
@@ -22,5 +24,13 @@ const TaskSchema = new mongoose.Schema(
   }
 )
 
-const taskModel = mongoose.model("tasks", TaskSchema)
+TaskSchema.plugin(paginate)
+
+interface TaskDocument extends mongoose.Document {}
+
+const taskModel = mongoose.model<
+  TaskDocument,
+  mongoose.PaginateModel<TaskDocument>
+>("tasks", TaskSchema)
+
 export default taskModel

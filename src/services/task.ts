@@ -8,16 +8,18 @@ export const insertTask = async (item: TaskInterface) => {
 }
 
 export const getAllTasks = async (idUser: string, filters: FiltersGetAll) => {
-  
-  const query = {  
+  const query = {
     ...filters,
-    idUser, 
-    body: { $regex: filters.body ?? ''}
+    idUser,
+    body: { $regex: filters.body ?? "" },
   }
-  
-  const responseItem = await taskModel.find(query)
+  const paginateOptions = {
+    page: 1,
+    limit: 10
+  }
+  const responseItem = await taskModel.paginate(query,paginateOptions)
   return responseItem
-}
+} 
 
 export const getOneTasks = async (id: string, idUser: string) => {
   const responseItem = await taskModel.findOne({ _id: id, idUser })
