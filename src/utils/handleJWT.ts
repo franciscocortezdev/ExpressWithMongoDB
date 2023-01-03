@@ -6,7 +6,7 @@ import { AuthInterface } from "../interfaces/authInterface"
 const secretJWT = process.env.JWT_SECRET
 
 export const generateToken = (credentials: AuthInterface) => {
-  const jwt = sign(credentials, secretJWT as Secret, { expiresIn: "1h" })
+  const jwt = sign(credentials, secretJWT as Secret)
 
   return jwt
 }
