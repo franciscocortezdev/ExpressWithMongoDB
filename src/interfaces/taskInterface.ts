@@ -8,5 +8,12 @@ export interface TaskInterface{
 
 export interface FiltersGetAll{
   body?: string,
+  done?: boolean,
+  page?: number
+}
+
+export interface queryGetAll{
+  idUser?: string,
+  body?: object,
   done?: boolean
 }

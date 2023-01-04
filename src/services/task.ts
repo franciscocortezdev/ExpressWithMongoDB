@@ -1,5 +1,9 @@
 import taskModel from "../models/task"
-import { TaskInterface, FiltersGetAll } from "../interfaces/taskInterface"
+import {
+  TaskInterface,
+  FiltersGetAll,
+  queryGetAll,
+} from "../interfaces/taskInterface"
 
 export const insertTask = async (item: TaskInterface) => {
   const responseInsert = await taskModel.create(item)
@@ -8,18 +12,23 @@ export const insertTask = async (item: TaskInterface) => {
 }
 
 export const getAllTasks = async (idUser: string, filters: FiltersGetAll) => {
-  const query = {
-    ...filters,
+  const query: queryGetAll = {
     idUser,
     body: { $regex: filters.body ?? "" },
   }
+
+  if (filters.done) query.done = filters.done
+
   const paginateOptions = {
     page: 1,
-    limit: 10
+    limit: 10,
   }
-  const responseItem = await taskModel.paginate(query,paginateOptions)
+
+  if (filters.page) paginateOptions.page = filters.page
+
+  const responseItem = await taskModel.paginate(query, paginateOptions)
   return responseItem
-} 
+}
 
 export const getOneTasks = async (id: string, idUser: string) => {
   const responseItem = await taskModel.findOne({ _id: id, idUser })
