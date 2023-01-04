@@ -15,7 +15,6 @@ const router = Router()
  * @swagger
  * tags:
  *   name: Tasks
- *   description: The tasks managing API
  * 
  * 
  * /task:
@@ -34,6 +33,11 @@ const router = Router()
  *             required: false
  *             schema:
  *               type: boolean
+ *            
+ *           - in: query
+ *             name: page
+ *             schema:
+ *               type: number
  *                 
  *     responses:
  *       200:
