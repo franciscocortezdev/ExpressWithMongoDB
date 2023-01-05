@@ -7,7 +7,10 @@ import {
   deleteTask,
 } from "../controllers/task"
 import { authSession } from "../middleware/session"
-import { validateCreateTask, validateUpdateTask } from "../middleware/validators/task"
+import {
+  validateCreateTask,
+  validateUpdateTask,
+} from "../middleware/validators/task"
 
 const router = Router()
 
@@ -15,8 +18,8 @@ const router = Router()
  * @swagger
  * tags:
  *   name: Tasks
- * 
- * 
+ *
+ *
  * /task:
  *   get:
  *     summary: Lists all the tasks
@@ -27,18 +30,18 @@ const router = Router()
  *             schema:
  *               type: string
  *             required: false
- * 
+ *
  *           - in: query
  *             name: done
  *             required: false
  *             schema:
  *               type: boolean
- *            
+ *
  *           - in: query
  *             name: page
  *             schema:
  *               type: number
- *                 
+ *
  *     responses:
  *       200:
  *         description: Get list all tasks
@@ -53,7 +56,7 @@ const router = Router()
  *                          properties:
  *                            _id:
  *                              type: string
- *                            body: 
+ *                            body:
  *                              type: string
  *                            done:
  *                              type: boolean
@@ -63,9 +66,9 @@ const router = Router()
  *                            updatedAt:
  *                              type: string
  *     security:
- *        - JWT_auth: []            
- * 
- * 
+ *        - JWT_auth: []
+ *
+ *
  *   post:
  *     tags: [Tasks]
  *     summary: Create a new task
@@ -93,7 +96,7 @@ const router = Router()
  *                      properties:
  *                        _id:
  *                          type: string
- *                        body: 
+ *                        body:
  *                          type: string
  *                        done:
  *                          type: boolean
@@ -105,9 +108,9 @@ const router = Router()
  *       500:
  *         description: Some server error
  *     security:
- *        - JWT_auth: []       
- * 
- * 
+ *        - JWT_auth: []
+ *
+ *
  * /task/{id}:
  *   get:
  *     summary: Get the task by id
@@ -131,7 +134,7 @@ const router = Router()
  *                      properties:
  *                        _id:
  *                          type: string
- *                        body: 
+ *                        body:
  *                          type: string
  *                        done:
  *                          type: boolean
@@ -140,13 +143,13 @@ const router = Router()
  *                          type: string
  *                        updatedAt:
  *                          type: string
- *         
+ *
  *       404:
  *         description: The task was not found
  *     security:
- *        - JWT_auth: []       
- * 
- * 
+ *        - JWT_auth: []
+ *
+ *
  *   put:
  *    summary: Update the task by the id
  *    tags: [Tasks]
@@ -171,15 +174,15 @@ const router = Router()
  *                    example: false
  *    responses:
  *      200:
- *        description: The book was updated        
+ *        description: The book was updated
  *      404:
  *        description: The book was not found
  *      500:
  *        description: Some error happened
  *    security:
- *        - JWT_auth: []      
- * 
- * 
+ *        - JWT_auth: []
+ *
+ *
  *   delete:
  *     summary: Remove the task by id
  *     tags: [Tasks]
@@ -197,17 +200,17 @@ const router = Router()
  *       404:
  *         description: The task was not found
  *     security:
- *        - JWT_auth: []      
+ *        - JWT_auth: []
  */
 
-router.get("/",authSession, getTasks)
+router.get("/", authSession, getTasks)
 
-router.get("/:id",authSession, getTask)
+router.get("/:id", authSession, getTask)
 
-router.post("/",validateCreateTask ,authSession, createTask)
+router.post("/", validateCreateTask, authSession, createTask)
 
-router.put("/:id",validateUpdateTask, authSession, updateTask)
+router.put("/:id", validateUpdateTask, authSession, updateTask)
 
-router.delete("/:id",authSession, deleteTask)
+router.delete("/:id", authSession, deleteTask)
 
 export { router }

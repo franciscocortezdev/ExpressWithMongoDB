@@ -15,6 +15,3 @@ export const compareToken = (token: string) => {
   const response = verify(token, secretJWT as Secret)
   return response
 }
-
-
-

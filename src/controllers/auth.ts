@@ -12,21 +12,20 @@ export const loginUser = async (req: Request, res: Response) => {
 
   try {
     const response = await userLogin(body.email)
-    if(!response) return handleError(res, "ERROR_USER_NOT_FOUND")
+    if (!response) return handleError(res, "ERROR_USER_NOT_FOUND")
     const passDecrypt = await decrypt(body.password, response.password)
-    if(!passDecrypt) return handleError(res, "ERROR_PASSWORD")
-    const toke = generateToken({...body, _id: response._id})
-    
+    if (!passDecrypt) return handleError(res, "ERROR_PASSWORD")
+    const toke = generateToken({ ...body, _id: response._id })
+
     const user = {
       user: response.nombre,
-      email: response.email
+      email: response.email,
     }
-    res.send({ 
-      token: toke, 
-      data: user
-     })
+    res.send({
+      token: toke,
+      data: user,
+    })
   } catch (error) {
-    
     handleError(res, "ERROR_LOGIN")
   }
 }
@@ -36,10 +35,10 @@ export const registerUser = async (req: Request, res: Response) => {
 
   try {
     const userExist = await userLogin(body.email)
-    if(userExist) return handleError(res, "ERROR_USER_ALREADY_EXISTS")
+    if (userExist) return handleError(res, "ERROR_USER_ALREADY_EXISTS")
     const passEncrypt = await encrypt(body.password)
-    const response = await userRegister({...body, password: passEncrypt})
-    res.send({ data: response})
+    const response = await userRegister({ ...body, password: passEncrypt })
+    res.send({ data: response })
   } catch (error) {
     handleError(res, "ERROR_REGISTER")
   }

@@ -1,7 +1,6 @@
-import { Request } from "express";
-import { JwtPayload } from "jsonwebtoken";
+import { Request } from "express"
+import { JwtPayload } from "jsonwebtoken"
 
-
-export interface reqExtend extends Request{
-  user?:  JwtPayload 
+export interface reqExtend extends Request {
+  user?: JwtPayload
 }

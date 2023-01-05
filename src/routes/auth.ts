@@ -6,14 +6,14 @@ const router = Router()
 
 /**
  * @swagger
- * tags: 
+ * tags:
  *  name: Auth
- * 
- *  
- * 
+ *
+ *
+ *
  * /auth/login:
  *
- *  post: 
+ *  post:
  *    tags: [Auth]
  *    requestBody:
  *      required: true
@@ -24,19 +24,18 @@ const router = Router()
  *              email:
  *                  type: string
  *                  example: prueba11@prueba.com
- *              password: 
+ *              password:
  *                  type: string
  *                  example: prueba11
  *    responses:
  *      201:
  *        description: User logged
- *      
- * 
- * 
+ *
+ *
+ *
  */
 
-router.post("/register",validateRegister, registerUser)
+router.post("/register", validateRegister, registerUser)
 router.post("/login", validateLogin, loginUser)
-
 
 export { router }

@@ -3,7 +3,6 @@ import { loginParams } from "../../interfaces/authInterface"
 import { handleError } from "../../utils/handleError"
 import { check, validationResult } from "express-validator"
 
-
 export const validateCreateTask = [
   check("body").exists().notEmpty(),
   check("done").exists().notEmpty().isBoolean(),
@@ -17,7 +16,6 @@ export const validateCreateTask = [
     }
   },
 ]
-
 
 export const validateUpdateTask = [
   check("body").exists().notEmpty(),
